@@ -1,0 +1,478 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0a0f1e;
+    color: #e8eaf6;
+    min-height: 100vh;
+  }
+
+  .app {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #7c4dff, #00e5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 0.25rem;
+  }
+
+  .logo-icon {
+    font-size: 1.8rem;
+    -webkit-text-fill-color: initial;
+  }
+
+  .subtitle {
+    color: #7986cb;
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  .network-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    color: #00e5ff;
+    margin-top: 0.75rem;
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #00e5ff;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-card {
+    background: rgba(124, 77, 255, 0.08);
+    border: 1px solid rgba(124, 77, 255, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #7c4dff;
+    background: linear-gradient(135deg, #7c4dff, #00e5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: #7986cb;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #7986cb;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::before {
+    content: '';
+    display: block;
+    width: 3px; height: 14px;
+    background: linear-gradient(#7c4dff, #00e5ff);
+    border-radius: 2px;
+  }
+
+  .creator-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    background: rgba(124, 77, 255, 0.06);
+    border-radius: 12px;
+    border: 1px solid rgba(124, 77, 255, 0.15);
+  }
+
+  .creator-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c4dff, #00e5ff);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .creator-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e8eaf6;
+  }
+
+  .creator-addr {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: #7986cb;
+    margin-top: 2px;
+    word-break: break-all;
+  }
+
+  .amount-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .amount-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 0.6rem 0.25rem;
+    color: #e8eaf6;
+    font-size: 0.85rem;
+    font-family: 'Space Mono', monospace;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+
+  .amount-btn:hover, .amount-btn.active {
+    background: rgba(124, 77, 255, 0.2);
+    border-color: #7c4dff;
+    color: #b39dff;
+  }
+
+  .input-group {
+    margin-bottom: 1rem;
+  }
+
+  .input-label {
+    font-size: 0.75rem;
+    color: #7986cb;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  input, textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    color: #e8eaf6;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input:focus, textarea:focus {
+    border-color: #7c4dff;
+  }
+
+  textarea { resize: none; height: 80px; }
+
+  .send-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #7c4dff, #651fff);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    letter-spacing: 0.3px;
+  }
+
+  .send-btn:hover { opacity: 0.9; }
+  .send-btn:active { transform: scale(0.99); }
+
+  .tips-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0.9rem 1rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    transition: background 0.15s;
+  }
+
+  .tip-item:hover {
+    background: rgba(255,255,255,0.05);
+  }
+
+  .tipper-av {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .tip-body { flex: 1; }
+
+  .tip-addr {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: #7986cb;
+  }
+
+  .tip-msg {
+    font-size: 0.85rem;
+    color: #c5cae9;
+    margin: 3px 0;
+  }
+
+  .tip-time {
+    font-size: 0.65rem;
+    color: #4a5080;
+  }
+
+  .tip-amount {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #00e5ff;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .success-msg {
+    background: rgba(0, 229, 100, 0.08);
+    border: 1px solid rgba(0, 229, 100, 0.2);
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    color: #69f0ae;
+    font-size: 0.82rem;
+    margin-top: 0.75rem;
+    display: none;
+  }
+
+  .contract-info {
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 0.7rem;
+    color: #3a4080;
+    font-family: 'Space Mono', monospace;
+  }
+</style>
+
+<div class="app">
+  <div class="header">
+    <div class="logo">
+      <span class="logo-icon">⚡</span>
+      StellarTip
+    </div>
+    <p class="subtitle">Tip your favorite creators on Stellar blockchain</p>
+    <div class="network-badge">
+      <div class="dot"></div>
+      Stellar Testnet
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value" id="totalXLM">1,247</div>
+      <div class="stat-label">Total XLM Tipped</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="totalTips">38</div>
+      <div class="stat-label">Tips Sent</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="topTip">150</div>
+      <div class="stat-label">Biggest Tip</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Send a Tip</div>
+
+    <div class="creator-section">
+      <div class="creator-avatar">🎨</div>
+      <div>
+        <div class="creator-name">AlexDesigns</div>
+        <div class="creator-addr">GDEMO...XXXXX (testnet)</div>
+      </div>
+    </div>
+
+    <div class="amount-options">
+      <button class="amount-btn" onclick="selectAmount(1, this)">1 XLM</button>
+      <button class="amount-btn active" onclick="selectAmount(5, this)">5 XLM</button>
+      <button class="amount-btn" onclick="selectAmount(10, this)">10 XLM</button>
+      <button class="amount-btn" onclick="selectAmount(50, this)">50 XLM</button>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">Custom amount (XLM)</label>
+      <input type="number" id="customAmount" placeholder="e.g. 25" min="1" />
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">Message (optional)</label>
+      <textarea id="tipMsg" placeholder="Great work! Love your content 🔥"></textarea>
+    </div>
+
+    <button class="send-btn" onclick="sendTip()">⚡ Send Tip</button>
+
+    <div class="success-msg" id="successMsg">
+      ✅ Tip sent successfully! Transaction confirmed on testnet.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Recent Tips</div>
+    <div class="tips-list" id="tipsList">
+    </div>
+  </div>
+
+  <div class="contract-info">
+    Contract ID: CAAAABBBBCCCCDDDDEEEEFFFFGGGGHHHH (testnet)<br/>
+    Powered by Soroban · Stellar Testnet
+  </div>
+</div>
+
+<script>
+  let selectedAmount = 5;
+
+  const colors = [
+    {bg:'rgba(124,77,255,0.2)',color:'#b39dff'},
+    {bg:'rgba(0,229,255,0.15)',color:'#00e5ff'},
+    {bg:'rgba(240,98,146,0.2)',color:'#f48fb1'},
+    {bg:'rgba(0,200,83,0.15)',color:'#69f0ae'},
+    {bg:'rgba(255,171,0,0.15)',color:'#ffd740'},
+  ];
+
+  const sampleTips = [
+    {addr:'GABC...1234', initials:'GA', msg:'Amazing tutorial! Helped me so much 🙌', amount:50, time:'2 min ago', c:0},
+    {addr:'GXYZ...5678', initials:'GX', msg:'Keep creating awesome content!', amount:10, time:'15 min ago', c:1},
+    {addr:'GDEF...9012', initials:'GD', msg:'Loved the latest video 🔥', amount:25, time:'1 hr ago', c:2},
+    {addr:'GHIJ...3456', initials:'GH', msg:'Small appreciation from Indonesia 🇮🇩', amount:5, time:'3 hr ago', c:3},
+    {addr:'GKLM...7890', initials:'GK', msg:'Been following you for 2 years. Legend!', amount:100, time:'1 day ago', c:4},
+  ];
+
+  function renderTips(list) {
+    const el = document.getElementById('tipsList');
+    el.innerHTML = list.map(t => {
+      const c = colors[t.c % colors.length];
+      return `<div class="tip-item">
+        <div class="tipper-av" style="background:${c.bg};color:${c.color}">${t.initials}</div>
+        <div class="tip-body">
+          <div class="tip-addr">${t.addr}</div>
+          <div class="tip-msg">${t.msg}</div>
+          <div class="tip-time">${t.time}</div>
+        </div>
+        <div class="tip-amount">+${t.amount} XLM</div>
+      </div>`;
+    }).join('');
+  }
+
+  function selectAmount(amt, btn) {
+    selectedAmount = amt;
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('customAmount').value = '';
+  }
+
+  function sendTip() {
+    const custom = document.getElementById('customAmount').value;
+    const amt = custom ? parseFloat(custom) : selectedAmount;
+    const msg = document.getElementById('tipMsg').value || 'No message';
+    
+    if (!amt || amt <= 0) { alert('Please enter a valid amount'); return; }
+
+    const btn = document.querySelector('.send-btn');
+    btn.textContent = '⏳ Sending...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      const initials = 'GY';
+      const newTip = {
+        addr: 'GYOU...NEW1',
+        initials,
+        msg,
+        amount: amt,
+        time: 'just now',
+        c: Math.floor(Math.random() * 5)
+      };
+      sampleTips.unshift(newTip);
+      renderTips(sampleTips);
+
+      document.getElementById('totalTips').textContent = parseInt(document.getElementById('totalTips').textContent) + 1;
+      document.getElementById('totalXLM').textContent = (parseInt(document.getElementById('totalXLM').textContent.replace(',','')) + amt).toLocaleString();
+
+      const successEl = document.getElementById('successMsg');
+      successEl.style.display = 'block';
+      setTimeout(() => successEl.style.display = 'none', 4000);
+
+      btn.textContent = '⚡ Send Tip';
+      btn.disabled = false;
+      document.getElementById('tipMsg').value = '';
+      document.getElementById('customAmount').value = '';
+    }, 1500);
+  }
+
+  renderTips(sampleTips);
+</script>
