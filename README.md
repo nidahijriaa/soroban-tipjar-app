@@ -115,8 +115,8 @@ make invoke-tip \
 
 ## 📸 Testnet Screenshot
 
-![Testnet Screenshot](screenshot1.png)
-![Testnet Screenshot](screenshot2.png)
+![Testnet Screenshot](Screenshot1.png)
+![Testnet Screenshot](Screenshot2.png)
 
 > Screenshot shows the contract deployed and initialized on Stellar testnet explorer.
 
@@ -138,9 +138,6 @@ make invoke-tip \
 
 - [Stellar Developer Docs](https://developers.stellar.org)
 - [Soroban Documentation](https://soroban.stellar.org)
-- [Stellar Expert Testnet Explorer](https://stellar.expert/explorer/testnet/tx/0860b1c40fe7a035068345a5294f2d47081578d6b25a83b195657692499e165b)
-- [Stellar Testnet Friendbot](https://friendbot.stellar.org)
-
 ---
 
 ## 📝 License
